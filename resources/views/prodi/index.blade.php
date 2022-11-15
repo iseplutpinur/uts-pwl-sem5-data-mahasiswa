@@ -12,7 +12,7 @@
 
         <div class="card">
             <div class="card-header d-md-flex flex-row justify-content-between">
-                <h3 class="card-title">Data Prodi</h3>
+                <h5 class="card-title">Data Prodi</h5>
                 <div>
                     <a class="btn btn-success" href="{{ route('prodi.create') }}"> Tambah Prodi</a>
                 </div>
@@ -31,7 +31,12 @@
                         @foreach ($prodis as $prodi)
                             <tr>
                                 <td>{{ $prodi->nama }}</td>
-                                <td>{{ $prodi->fakultas->nama }}</td>
+                                <td>
+                                    <a class="text-decoration-none"
+                                        href="{{ route('fakultas.show', $prodi->fakultas->id) }}">
+                                        {{ $prodi->fakultas->nama }}
+                                    </a>
+                                </td>
                                 <td>{{ $prodi->jml_mhs }}</td>
                                 <td>
                                     <form action="{{ route('prodi.destroy', $prodi->id) }}" method="Post">

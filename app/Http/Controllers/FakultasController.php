@@ -16,7 +16,7 @@ class FakultasController extends Controller
      */
     public function index()
     {
-        $fakultass = Fakultas::orderBy('nama')->paginate(10);
+        $fakultass = Fakultas::orderBy('nama')->paginate(5);
         return view('fakultas.index', compact('fakultass'));
     }
 

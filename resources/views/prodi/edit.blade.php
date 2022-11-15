@@ -13,7 +13,7 @@
         @endif
         <div class="card">
             <div class="card-header d-md-flex flex-row justify-content-between">
-                <h3 class="card-title">Ubah Prodi</h3>
+                <h5 class="card-title">Ubah Prodi</h5>
                 <div>
                     <a class="btn btn-secondary" href="{{ URL::previous() }}"> Kembali</a>
                 </div>

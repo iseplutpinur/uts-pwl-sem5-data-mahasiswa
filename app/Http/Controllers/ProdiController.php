@@ -16,7 +16,7 @@ class ProdiController extends Controller
      */
     public function index()
     {
-        $prodis = Prodi::orderBy('nama')->paginate(10);
+        $prodis = Prodi::orderBy('nama')->paginate(5);
         return view('prodi.index', compact('prodis'));
     }
 
