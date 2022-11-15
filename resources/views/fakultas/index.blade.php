@@ -23,7 +23,8 @@
                         <tr>
                             <th>Nama</th>
                             <th>Jumlah Mahasiswa</th>
-                            <th width="280px">Action</th>
+                            <th>Jumlah Prodi</th>
+                            <th width="280px">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,6 +32,7 @@
                             <tr>
                                 <td>{{ $fakultas->nama }}</td>
                                 <td>{{ $fakultas->jml_mhs }}</td>
+                                <td>{{ $fakultas->prodis->count() }}</td>
                                 <td>
                                     <form action="{{ route('fakultas.destroy', $fakultas->id) }}" method="Post">
                                         <a class="btn btn-secondary btn-sm"
