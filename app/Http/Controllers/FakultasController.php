@@ -14,7 +14,8 @@ class FakultasController extends Controller
      */
     public function index()
     {
-        //
+        $fakultass = Fakultas::orderBy('nama')->paginate(10);
+        return view('fakultas.index', compact('fakultass'));
     }
 
     /**
@@ -24,7 +25,7 @@ class FakultasController extends Controller
      */
     public function create()
     {
-        //
+        return view('fakultas.create');
     }
 
     /**
@@ -35,7 +36,12 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+        ]);
+
+        Fakultas::create($request->post());
+        return redirect()->route('fakultas.index')->with('success', 'Data Berhasil Disimpan');
     }
 
     /**
@@ -44,9 +50,12 @@ class FakultasController extends Controller
      * @param  \App\Models\Fakultas  $fakultas
      * @return \Illuminate\Http\Response
      */
-    public function show(Fakultas $fakultas)
+    public function show(Fakultas $fakulta)
     {
-        //
+        // karena laravel secara default mengubah kata jamak dan di hilangkan 
+        // huruf "s" nya maka fakultas diubah dengan sendirinya menjadi fakulta
+        $fakultas = $fakulta;
+        return view('fakultas.show', compact('fakultas'));
     }
 
     /**
@@ -55,9 +64,12 @@ class FakultasController extends Controller
      * @param  \App\Models\Fakultas  $fakultas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Fakultas $fakultas)
+    public function edit(Fakultas $fakulta)
     {
-        //
+        // karena laravel secara default mengubah kata jamak dan di hilangkan 
+        // huruf "s" nya maka fakultas diubah dengan sendirinya menjadi fakulta
+        $fakultas = $fakulta;
+        return view('fakultas.edit', compact('fakultas'));
     }
 
     /**
@@ -67,9 +79,16 @@ class FakultasController extends Controller
      * @param  \App\Models\Fakultas  $fakultas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fakultas $fakultas)
+    public function update(Request $request, Fakultas $fakulta)
     {
-        //
+        // karena laravel secara default mengubah kata jamak dan di hilangkan 
+        // huruf "s" nya maka fakultas diubah dengan sendirinya menjadi fakulta
+        $request->validate([
+            'nama' => 'required',
+        ]);
+        $fakultas = $fakulta;
+        $fakultas->fill($request->post())->save();
+        return redirect()->route('fakultas.index')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -78,8 +97,12 @@ class FakultasController extends Controller
      * @param  \App\Models\Fakultas  $fakultas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Fakultas $fakultas)
+    public function destroy(Fakultas $fakulta)
     {
-        //
+        // karena laravel secara default mengubah kata jamak dan di hilangkan 
+        // huruf "s" nya maka fakultas diubah dengan sendirinya menjadi fakulta
+        $fakultas = $fakulta;
+        $fakultas->delete();
+        return redirect()->route('fakultas.index')->with('success', 'Data berhasil dihapus');
     }
 }

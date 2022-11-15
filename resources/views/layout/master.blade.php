@@ -41,6 +41,14 @@
         </div>
     </nav>
     @yield('content')
+
+
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <p class="text-muted">&copy; 2022 UTS Pemrograman Web Lanjut |
+                Chika Stefanny Siswandi 2113191006</p>
+        </footer>
+    </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

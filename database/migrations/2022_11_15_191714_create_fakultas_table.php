@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('fakultas', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->integer('jml_mhs');
+            $table->integer('jml_mhs')->default(0);
             $table->timestamps();
         });
     }

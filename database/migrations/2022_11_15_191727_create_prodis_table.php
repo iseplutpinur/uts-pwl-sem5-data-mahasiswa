@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('fakultas_id', false, true)->nullable()->default(null);
             $table->string('nama');
-            $table->integer('jml_mhs');
+            $table->integer('jml_mhs')->default(0);
             $table->timestamps();
 
             $table->foreign('fakultas_id')

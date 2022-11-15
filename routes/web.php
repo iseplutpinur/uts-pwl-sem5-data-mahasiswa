@@ -5,6 +5,7 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\FakultasController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
