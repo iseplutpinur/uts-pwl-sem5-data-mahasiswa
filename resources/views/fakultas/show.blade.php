@@ -5,35 +5,61 @@
 @endsection
 
 @section('content')
-    <div class="container mt-2">
-        <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="pull-left">
-                    <h2>Ubah Fakultas</h2>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header d-md-flex flex-row justify-content-between">
+                <h3 class="card-title">Lihat Fakultas</h3>
+                <div>
+                    <a class="btn btn-secondary" href="{{ route('fakultas.index') }}"> Kembali</a>
                 </div>
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('fakultas.index') }}" enctype="multipart/form-data">
-                        Back</a>
-                </div>
+            </div>
+            <div class="card-body">
+                <p><strong>Fakultas Nama:</strong> {{ $fakultas->nama }}</p>
+                <p><strong>Jumlah Mahasiswa:</strong> {{ $fakultas->jml_mhs }}</p>
             </div>
         </div>
-        @if (session('status'))
-            <div class="alert alert-success mb-1 mt-1">
-                {{ session('status') }}
-            </div>
-        @endif
-        <form action="{{ route('fakultas.update', $fakultas->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Fakultas Nama:</strong>
-                        <input type="text" name="nama" value="{{ $fakultas->nama }}" class="form-control"
-                            placeholder="Fakultas nama" readonly>
+        <br>
+        <div class="row">
+            @if ($mahasiswas)
+                <div class="col-lg-6">
+                    <div class="card mb-1">
+                        <div class="card-header fw-bold">
+                            Fakultas Mahasiswa
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            @foreach ($mahasiswas as $mahasiswa)
+                                <a href="{{ route('mahasiswa.show', $mahasiswa->id) }}" class="text-decoration-none">
+                                    <li class="list-group-item">{{ $mahasiswa->nama }}
+                                        <br>
+                                        <small>{{ $mahasiswa->npm }}</small>
+                                    </li>
+                                </a>
+                            @endforeach
+                        </ul>
                     </div>
+                    {!! $mahasiswas->appends(array_except(Request::query(), 'mahasiswa'))->links('pagination::bootstrap-5') !!}
                 </div>
-            </div>
-        </form>
+            @endif
+            @if ($prodis)
+                <div class="col-lg-6">
+                    <div class="card mb-1">
+                        <div class="card-header fw-bold">
+                            Fakultas Mahasiswa
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            @foreach ($prodis as $prodi)
+                                <a href="{{ route('prodi.show', $prodi->id) }}" class="text-decoration-none">
+                                    <li class="list-group-item">{{ $prodi->nama }} <br>
+                                        <small>{{ $prodi->jml_mhs }} Mahasiswa</small>
+                                    </li>
+                                </a>
+                            @endforeach
+                        </ul>
+                    </div>
+                    {!! $prodis->appends(array_except(Request::query(), 'prodi'))->links('pagination::bootstrap-5') !!}
+                </div>
+            @endif
+            <div class="col-lg-6"></div>
+        </div>
     </div>
 @endsection

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fakultas;
+use App\Models\Mahasiswa;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
 
 class FakultasController extends Controller
@@ -55,7 +57,17 @@ class FakultasController extends Controller
         // karena laravel secara default mengubah kata jamak dan di hilangkan 
         // huruf "s" nya maka fakultas diubah dengan sendirinya menjadi fakulta
         $fakultas = $fakulta;
-        return view('fakultas.show', compact('fakultas'));
+        $fakultas = $fakulta;
+
+        $mahasiswas = Mahasiswa::join('prodis', 'prodis.id', '=', 'mahasiswas.prodi_id')
+            ->join('fakultas', 'fakultas.id', '=', 'prodis.fakultas_id')
+            ->where('prodis.fakultas_id', $fakultas->id)->orderBy('npm')
+            ->paginate(3, 'mahasiswas.*', 'mahasiswa');
+
+        $prodis = Prodi::where('fakultas_id', $fakultas->id)->orderBy('nama')
+            ->paginate(3, 'prodis.*', 'prodi');
+
+        return view('fakultas.show', compact('fakultas', 'mahasiswas', 'prodis'));
     }
 
     /**

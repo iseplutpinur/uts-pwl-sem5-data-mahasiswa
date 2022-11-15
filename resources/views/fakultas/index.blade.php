@@ -7,9 +7,7 @@
 @section('content')
     <div class="container mt-4">
         @if ($message = Session::get('success'))
-            <div class="alert alert-success mb-2">
-                <p>{{ $message }}</p>
-            </div>
+            <div class="alert alert-success" role="alert">{{ $message }}</div>
         @endif
 
         <div class="card">
@@ -24,7 +22,7 @@
                     <thead>
                         <tr>
                             <th>Nama</th>
-                            <th>Jml. Mahasiswa</th>
+                            <th>Jumlah Mahasiswa</th>
                             <th width="280px">Action</th>
                         </tr>
                     </thead>
