@@ -14,7 +14,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        $mahasiswas = Mahasiswa::orderBy('npm')->paginate(10);
+        return view('mahasiswa.index', compact('mahasiswas'));
     }
 
     /**

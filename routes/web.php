@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\FakultasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +15,9 @@ use App\Http\Controllers\ProdiController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// rute default mahasiswa
+Route::get('/', [MahasiswaController::class, 'index'])->name('home');
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::resource('/fakultas', FakultasController::class);
-Route::resource('/prodi', ProdiController::class);
 Route::resource('/mahasiswa', MahasiswaController::class);
+Route::resource('/prodi', ProdiController::class);
+Route::resource('/fakultas', FakultasController::class);
