@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fakultas;
+use App\Models\Mahasiswa;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,8 @@ class ProdiController extends Controller
      */
     public function index()
     {
-        //
+        $prodis = Prodi::orderBy('nama')->paginate(10);
+        return view('prodi.index', compact('prodis'));
     }
 
     /**
@@ -24,7 +27,8 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        //
+        $fakultass = Fakultas::all();
+        return view('prodi.create', compact('fakultass'));
     }
 
     /**
@@ -35,7 +39,13 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'fakultas_id' => 'required|int',
+        ]);
+
+        Prodi::create($request->post());
+        return redirect()->route('prodi.index')->with('success', 'Data Berhasil Disimpan');
     }
 
     /**
@@ -46,7 +56,9 @@ class ProdiController extends Controller
      */
     public function show(Prodi $prodi)
     {
-        //
+        $mahasiswas = Mahasiswa::where('prodi_id', $prodi->id)->orderBy('npm')
+            ->paginate(3);
+        return view('prodi.show', compact('prodi', 'mahasiswas'));
     }
 
     /**
@@ -57,7 +69,8 @@ class ProdiController extends Controller
      */
     public function edit(Prodi $prodi)
     {
-        //
+        $fakultass = Fakultas::all();
+        return view('prodi.edit', compact('prodi', 'fakultass'));
     }
 
     /**
@@ -69,7 +82,11 @@ class ProdiController extends Controller
      */
     public function update(Request $request, Prodi $prodi)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+        ]);
+        $prodi->fill($request->post())->save();
+        return redirect()->route('prodi.index')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -80,6 +97,7 @@ class ProdiController extends Controller
      */
     public function destroy(Prodi $prodi)
     {
-        //
+        $prodi->delete();
+        return redirect()->route('prodi.index')->with('success', 'Data berhasil dihapus');
     }
 }

@@ -8,13 +8,13 @@
     <div class="container mt-4">
         <div class="card">
             <div class="card-header d-md-flex flex-row justify-content-between">
-                <h3 class="card-title">Lihat Fakultas</h3>
+                <h5 class="card-title">Lihat Fakultas</h5>
                 <div>
-                    <a class="btn btn-secondary" href="{{ route('fakultas.index') }}"> Kembali</a>
+                    <a class="btn btn-secondary" href="{{ URL::previous() }}"> Kembali</a>
                 </div>
             </div>
             <div class="card-body">
-                <p><strong>Fakultas Nama:</strong> {{ $fakultas->nama }}</p>
+                <p><strong>Nama Fakultas:</strong> {{ $fakultas->nama }}</p>
                 <p><strong>Jumlah Mahasiswa:</strong> {{ $fakultas->jml_mhs }}</p>
             </div>
         </div>
@@ -24,14 +24,14 @@
                 <div class="col-lg-6">
                     <div class="card mb-1">
                         <div class="card-header fw-bold">
-                            Fakultas Mahasiswa
+                            Mahasiswa Fakultas {{ $fakultas->nama }}
                         </div>
                         <ul class="list-group list-group-flush">
                             @foreach ($mahasiswas as $mahasiswa)
                                 <a href="{{ route('mahasiswa.show', $mahasiswa->id) }}" class="text-decoration-none">
                                     <li class="list-group-item">{{ $mahasiswa->nama }}
                                         <br>
-                                        <small>{{ $mahasiswa->npm }}</small>
+                                        <small>{{ $mahasiswa->npm }} | {{ $mahasiswa->prodi->nama }}</small>
                                     </li>
                                 </a>
                             @endforeach
@@ -44,7 +44,7 @@
                 <div class="col-lg-6">
                     <div class="card mb-1">
                         <div class="card-header fw-bold">
-                            Fakultas Mahasiswa
+                            Prodi Fakultas {{ $fakultas->nama }}
                         </div>
                         <ul class="list-group list-group-flush">
                             @foreach ($prodis as $prodi)

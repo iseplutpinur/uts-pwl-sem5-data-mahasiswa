@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('title')
-    Data Fakultas
+    Data Prodi
 @endsection
 
 @section('content')
@@ -12,9 +12,9 @@
 
         <div class="card">
             <div class="card-header d-md-flex flex-row justify-content-between">
-                <h5 class="card-title">Data Fakultas</h5>
+                <h3 class="card-title">Data Prodi</h3>
                 <div>
-                    <a class="btn btn-success" href="{{ route('fakultas.create') }}"> Tambah Fakultas</a>
+                    <a class="btn btn-success" href="{{ route('prodi.create') }}"> Tambah Prodi</a>
                 </div>
             </div>
             <div class="card-body">
@@ -22,23 +22,23 @@
                     <thead>
                         <tr>
                             <th>Nama</th>
+                            <th>Fakultas</th>
                             <th>Jumlah Mahasiswa</th>
-                            <th>Jumlah Prodi</th>
                             <th width="280px">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($fakultass as $fakultas)
+                        @foreach ($prodis as $prodi)
                             <tr>
-                                <td>{{ $fakultas->nama }}</td>
-                                <td>{{ $fakultas->jml_mhs }}</td>
-                                <td>{{ $fakultas->prodis->count() }}</td>
+                                <td>{{ $prodi->nama }}</td>
+                                <td>{{ $prodi->fakultas->nama }}</td>
+                                <td>{{ $prodi->jml_mhs }}</td>
                                 <td>
-                                    <form action="{{ route('fakultas.destroy', $fakultas->id) }}" method="Post">
+                                    <form action="{{ route('prodi.destroy', $prodi->id) }}" method="Post">
                                         <a class="btn btn-secondary btn-sm"
-                                            href="{{ route('fakultas.show', $fakultas->id) }}">Lihat</a>
+                                            href="{{ route('prodi.show', $prodi->id) }}">Lihat</a>
                                         <a class="btn btn-primary btn-sm"
-                                            href="{{ route('fakultas.edit', $fakultas->id) }}">Ubah</a>
+                                            href="{{ route('prodi.edit', $prodi->id) }}">Ubah</a>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
@@ -49,7 +49,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {!! $fakultass->links('pagination::bootstrap-5') !!}
+                {!! $prodis->links('pagination::bootstrap-5') !!}
             </div>
         </div>
     </div>
