@@ -27,7 +27,7 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        $fakultass = Fakultas::all();
+        $fakultass = Fakultas::orderBy('nama')->get();
         return view('prodi.create', compact('fakultass'));
     }
 

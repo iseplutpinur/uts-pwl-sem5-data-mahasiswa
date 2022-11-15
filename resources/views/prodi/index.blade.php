@@ -32,10 +32,12 @@
                             <tr>
                                 <td>{{ $prodi->nama }}</td>
                                 <td>
-                                    <a class="text-decoration-none"
-                                        href="{{ route('fakultas.show', $prodi->fakultas->id) }}">
-                                        {{ $prodi->fakultas->nama }}
-                                    </a>
+                                    @if ($prodi->fakultas)
+                                        <a class="text-decoration-none"
+                                            href="{{ route('fakultas.show', $prodi->fakultas->id) }}">
+                                            {{ $prodi->fakultas->nama }}
+                                        </a>
+                                    @endif
                                 </td>
                                 <td>{{ $prodi->jml_mhs }}</td>
                                 <td>
@@ -46,8 +48,8 @@
                                             href="{{ route('prodi.edit', $prodi->id) }}">Ubah</a>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"
-                                            class="btn btn-danger btn-sm"onclick="return confirm('Apakah anda yakin?')">Hapus</button>
+                                        <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Apakah anda yakin?')">Hapus</button>
                                     </form>
                                 </td>
                             </tr>

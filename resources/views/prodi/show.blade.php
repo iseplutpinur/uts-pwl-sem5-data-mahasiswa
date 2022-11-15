@@ -14,8 +14,14 @@
                 </div>
             </div>
             <div class="card-body">
-                <p><strong>Prodi Nama:</strong> {{ $prodi->nama }}</p>
-                <p><strong>Fakultas:</strong> {{ $prodi->fakultas->nama }}</p>
+                <p><strong>Nama Prodi:</strong> {{ $prodi->nama }}</p>
+                <p><strong>Fakultas:</strong>
+                    @if ($prodi->fakultas)
+                        <a class="text-decoration-none" href="{{ route('fakultas.show', $prodi->fakultas->id) }}">
+                            {{ $prodi->fakultas->nama }}
+                        </a>
+                    @endif
+                </p>
                 <p><strong>Jumlah Mahasiswa:</strong> {{ $prodi->jml_mhs }}</p>
             </div>
         </div>
